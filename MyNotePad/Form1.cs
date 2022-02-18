@@ -105,6 +105,57 @@ namespace MyNotePad
         {
             PrintPreviewDialog preview = new PrintPreviewDialog();
             prntDoc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(prntDoc_PrintPage);
+            preview.Document = prntDoc;
+            if (preview.ShowDialog(this) == DialogResult.OK)
+            {
+                prntDoc.Print();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox1.Undo();
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox1.Cut();
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox1.Copy();
+        }
+
+        private void pasteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            textBox1.Paste();
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox1.SelectAll();
+        }
+
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FontDialog font = new FontDialog();
+            font.ShowColor = true;
+            font.ShowEffects = true;
+            if(font.ShowDialog(this) == DialogResult.OK)
+            {
+                textBox1.ForeColor = font.Color;
+                textBox1.Font = font.Font;
+            }
         }
     }
 }
